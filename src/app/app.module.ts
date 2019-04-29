@@ -4,19 +4,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from '#/app-routing.module';
-import { AppComponent } from '#/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MaterialModule } from '#/material.module';
+
+import { AppComponent } from '#/app.component';
 import { environment } from '##/environments/environment';
 
-
-import {DemoMaterialModule} from './material.module';
-
-import { MenuComponent } from './components/menu/menu.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { UserComponent } from './components/user/user/user.component';
-import { UserLoginComponent } from './components/user/user-login/user-login.component';
-import { TracksComponent } from './components/tracks/tracks/tracks.component';
+import { MenuComponent } from '$/menu/menu.component';
+import { UserComponent } from '$/user/user/user.component';
+import { UserLoginComponent } from '$/user/user-login/user-login.component';
+import { TracksComponent } from '$/tracks/tracks/tracks.component';
+import { DashboardComponent } from '$/dashboard/dashboard.component';
+import { ToolbarComponent } from '$/toolbar/toolbar.component';
+import { UserLogoutComponent } from './components/user/user-logout/user-logout.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { TracksComponent } from './components/tracks/tracks/tracks.component';
     ToolbarComponent,
     UserComponent,
     UserLoginComponent,
-    TracksComponent
+    TracksComponent,
+    DashboardComponent,
+    UserLogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -33,11 +36,12 @@ import { TracksComponent } from './components/tracks/tracks/tracks.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    DemoMaterialModule,
+    MaterialModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   entryComponents: [
-    UserLoginComponent
+    UserLoginComponent,
+    UserLogoutComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
-import { AlertService } from '#/services/alert.service';
 import { Component } from '@angular/core';
-import { AuthService, User } from '#/services/auth.service';
 import { MatDialogRef } from '@angular/material';
+import { AlertService } from '#/services/alert.service';
+import { AuthService } from '#/services/auth.service';
 
 @Component({
   selector: 'app-user-login',
@@ -12,7 +12,7 @@ export class UserLoginComponent {
   username: string = null;
   password: string = null;
 
-  logginIn = false;
+  running = false;
 
   constructor(
     private auth: AuthService,
@@ -21,22 +21,24 @@ export class UserLoginComponent {
   ) {}
 
   login() {
-    this.logginIn = true;
+    this.running = true;
 
     this.auth.login(this.username, this.password).subscribe(
       data => {
+        this.alert.message('Entrada com sucesso');
+
         this.dialogRef.close(data);
       },
       err => {
         if (err.error.kind === 'ResourceNotFound') {
-          this.alert.add('Nenhum usuário com este nome');
+          this.alert.error('Nenhum usuário com este nome');
         } else if (err.error.kind === 'InvalidPassword') {
-          this.alert.add('Senha errada');
+          this.alert.error('Senha errada');
         } else {
-          this.alert.add(err.error.description);
+          this.alert.error(err);
         }
 
-        this.dialogRef.close();
+        this.dialogRef.close(null);
       }
     );
   }

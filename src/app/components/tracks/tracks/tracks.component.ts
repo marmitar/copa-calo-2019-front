@@ -21,9 +21,7 @@ export class TracksComponent implements OnInit {
       data => {
         this.tracks = data;
       },
-      err => {
-        this.alert.add(err.error.description);
-      }
+      err => this.alert.error(err)
     );
   }
 

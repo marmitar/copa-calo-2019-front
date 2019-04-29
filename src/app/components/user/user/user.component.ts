@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, User } from '#/services/auth.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
-import { UserLoginComponent } from '#/components/user/user-login/user-login.component';
+import { MatDialog } from '@angular/material';
+
+import { UserLoginComponent } from '$/user/user-login/user-login.component';
+import { UserLogoutComponent } from '$/user/user-logout/user-logout.component';
 
 @Component({
   selector: 'app-user',
@@ -18,22 +20,22 @@ export class UserComponent implements OnInit {
     this.getUser();
   }
 
-  openDialog(): void {
+  loginDialog(): void {
     const dialogRef = this.dialog.open(UserLoginComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.user = result;
-        this.token = result.token;
-      }
+      this.user = result;
+      this.token = result.token;
     });
   }
 
-  logUser() {
-    this.auth.read(this.token).subscribe(
-      data => console.log(data),
-      err => console.log(err)
-    );
+  logoutDialog() {
+    const dialogRef = this.dialog.open(UserLogoutComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.user = result;
+      this.token = result.token;
+    });
   }
 
   getUser() {
