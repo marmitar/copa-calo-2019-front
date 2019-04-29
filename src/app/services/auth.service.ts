@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '##/environments/environment';
-
+import { User } from '#/models';
+export { User };
 
 @Injectable({
   providedIn: 'root'
@@ -37,10 +38,4 @@ export class AuthService {
   free(username: string) {
     return this.http.get(this.url, {params: {username}}) as Observable<boolean>;
   }
-}
-
-export class User {
-  username: string;
-  permission: string;
-  token?: string;
 }

@@ -16,6 +16,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { UserComponent } from './components/user/user/user.component';
 import { UserLoginComponent } from './components/user/user-login/user-login.component';
+import { TracksComponent } from './components/tracks/tracks/tracks.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserLoginComponent } from './components/user/user-login/user-login.comp
     MenuComponent,
     ToolbarComponent,
     UserComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    TracksComponent
   ],
   imports: [
     BrowserModule,
