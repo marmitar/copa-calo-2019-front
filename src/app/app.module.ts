@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from '#/app-routing.module';
 import { AppComponent } from '#/app.component';
@@ -9,18 +9,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '##/environments/environment';
 
-import {
-  MatToolbarModule, MatCardModule, MatButtonModule,
-  MatMenuModule, MatIconModule
-} from '@angular/material';
+
+import {DemoMaterialModule} from './material.module';
+
 import { MenuComponent } from './components/menu/menu.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { UserComponent } from './components/user/user/user.component';
+import { UserLoginComponent } from './components/user/user-login/user-login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    UserComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,12 +31,11 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
+    DemoMaterialModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+  ],
+  entryComponents: [
+    UserLoginComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

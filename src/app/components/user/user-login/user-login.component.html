@@ -1,0 +1,29 @@
+<div *ngIf="logginIn; else getLoginData">
+  <mat-spinner></mat-spinner>
+</div>
+
+<ng-template #getLoginData>
+  <h1 mat-dialog-title>Login</h1>
+
+  <div mat-dialog-content>
+    <p>
+      <mat-form-field>
+        <mat-label>Usuário</mat-label>
+        <input matInput [(ngModel)]="username">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Senha</mat-label>
+        <input matInput [(ngModel)]="password">
+      </mat-form-field>
+    </p>
+  </div>
+
+  <div mat-dialog-actions>
+    <div class="filler"></div>
+    <button class="login" mat-button (click)="login()" cdkFocusInitial>
+      Entrar
+    </button>
+  </div>
+</ng-template>

@@ -18,21 +18,20 @@ export class AuthService {
     return this.http.post(this.url + 'auth', body) as Observable<User>;
   }
 
-  logout() {
-    return this.http.delete(this.url + 'auth') as Observable<boolean>;
+  logout(token: string) {
+    const headers = {Authorization: 'Bearer ' + token};
+    return this.http.delete(this.url + 'auth', {headers}) as Observable<boolean>;
   }
 
-  refresh() {
-    return this.http.get(this.url + 'refresh') as Observable<boolean>;
+  read(token: string) {
+    const headers = {Authorization: 'Bearer ' + token};
+    return this.http.get(this.url + 'read', {headers}) as Observable<User>;
   }
 
-  read() {
-    return this.http.get(this.url + 'read') as Observable<User>;
-  }
-
-  update(username?: string, password?: string) {
+  update(token: string, username?: string, password?: string) {
+    const headers = {Authorization: 'Bearer ' + token};
     const body = {username, password};
-    return this.http.patch(this.url + 'update', body) as Observable<User>;
+    return this.http.patch(this.url + 'update', body, {headers}) as Observable<User>;
   }
 
   free(username: string) {
@@ -42,4 +41,6 @@ export class AuthService {
 
 export class User {
   username: string;
+  permission: string;
+  token?: string;
 }
