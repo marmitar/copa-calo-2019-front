@@ -28,4 +28,14 @@ export class AthleteService {
     return this.http.put(this.url + 'create', body, headers) as Observable<Athlete>;
   }
 
+  delete(name: string, rg: string, headers: {headers: HttpHeaders}) {
+    const body = {athleteName: name, athleteRg: rg};
+    return this.http.post(this.url + 'delete', body, headers) as Observable<any>;
+  }
+
+  deregister(name: string, rg: string, trackName: string, headers: {headers: HttpHeaders}) {
+    const body = {athleteName: name, athleteRg: rg, trackName};
+    return this.http.post(this.url + 'delete', body, headers) as Observable<any>;
+  }
+
 }

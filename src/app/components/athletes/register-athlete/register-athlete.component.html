@@ -3,7 +3,7 @@
 <form class="example-form" [formGroup]="inscricaoForm" (ngSubmit)="submitRegistration()">
   <mat-form-field class="example-full-width">
     <mat-label>Faculdade</mat-label>
-    <mat-select formControlName="college" required>
+    <mat-select formControlName="college" required #CollegeF>
       <mat-option *ngFor="let option of colleges" [value]="option">
         {{ option }}
       </mat-option>
@@ -13,7 +13,7 @@
   <div *ngIf="tracks">
       <mat-form-field class="example-full-width">
         <mat-label>Prova</mat-label>
-        <mat-select formControlName="track" required>
+        <mat-select formControlName="track" required #TrackF>
           <mat-option *ngFor="let option of tracks" [value]="option">
             {{ option.name }}  ({{ option.sex }})
           </mat-option>

@@ -21,6 +21,7 @@ import { UserLogoutComponent } from './components/user/user-logout/user-logout.c
 import { AthletesComponent } from './components/athletes/athletes/athletes.component';
 import { CreateAthleteComponent } from './components/athletes/create-athlete/create-athlete.component';
 import { RegisterAthleteComponent } from './components/athletes/register-athlete/register-athlete.component';
+import { DeleteAthleteComponent } from './components/athletes/delete-athlete/delete-athlete.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { RegisterAthleteComponent } from './components/athletes/register-athlete
     UserLogoutComponent,
     AthletesComponent,
     CreateAthleteComponent,
-    RegisterAthleteComponent
+    RegisterAthleteComponent,
+    DeleteAthleteComponent
   ],
   imports: [
     BrowserModule,

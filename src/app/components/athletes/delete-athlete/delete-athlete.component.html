@@ -1,0 +1,43 @@
+<mat-card class="atleta-delete">
+
+    <form class="example-form" [formGroup]="deleteForm" (ngSubmit)="submitDelete()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Faculdade</mat-label>
+        <mat-select formControlName="college" required>
+          <mat-option *ngFor="let option of colleges" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Atleta</mat-label>
+          <mat-select formControlName="athlete" required>
+            <mat-option *ngFor="let option of athletes" [value]="option">
+              {{ option.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Prova</mat-label>
+          <mat-select formControlName="track" #prova>
+            <mat-option [value]="'todas'" selected="selected">
+              Todas
+            </mat-option>
+            <mat-option *ngFor="let option of tracks" [value]="option">
+              {{ option.trackName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      <button mat-raised-button submit [disabled]="!deleteForm.valid">
+        <div *ngIf="prova.value !== 'todas'; else todos">
+          Retirar da Prova
+        </div>
+        <ng-template #todos>
+          Remover Atletar
+        </ng-template>
+      </button>
+    </form>
+    </mat-card>
