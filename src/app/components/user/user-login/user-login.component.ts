@@ -13,21 +13,21 @@ export class UserLoginComponent {
   password: string = null;
 
   running = false;
+  success = false;
 
   constructor(
     private auth: AuthService,
     private alert: AlertService,
-    public dialogRef: MatDialogRef<UserLoginComponent, User>
+    public dialogRef: MatDialogRef<UserLoginComponent, boolean>
   ) {}
 
   login() {
     this.running = true;
 
     this.auth.login(this.username, this.password).subscribe(
-      data => {
+      () => {
         this.alert.message('Entrada com sucesso');
-
-        this.dialogRef.close(data);
+        this.success = true;
       },
       err => {
         if (err.error.kind === 'ResourceNotFound') {
@@ -37,9 +37,8 @@ export class UserLoginComponent {
         } else {
           this.alert.error(err);
         }
-
-        this.dialogRef.close(null);
-      }
+      },
+      () => this.dialogRef.close(this.success)
     );
   }
 

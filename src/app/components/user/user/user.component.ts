@@ -11,8 +11,7 @@ import { UserLogoutComponent } from '$/user/user-logout/user-logout.component';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  user: User = null;
-  token: string = null;
+  username: string = null;
 
   constructor(public auth: AuthService, public dialog: MatDialog) { }
 
@@ -23,34 +22,21 @@ export class UserComponent implements OnInit {
   loginDialog(): void {
     const dialogRef = this.dialog.open(UserLoginComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.user = result;
-      this.token = result.token;
+    dialogRef.afterClosed().subscribe(success => {
+      this.username = this.auth.username();
     });
   }
 
   logoutDialog() {
-    const dialogRef = this.dialog.open(UserLogoutComponent, {data: this.token});
+    const dialogRef = this.dialog.open(UserLogoutComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.user = null;
-        this.token = null;
-      }
+    dialogRef.afterClosed().subscribe(success => {
+      this.username = this.auth.username();
     });
   }
 
   getUser() {
-    if (this.token) {
-      this.auth.read(this.token).subscribe(
-        data => {
-          this.user = data;
-        },
-        err => {
-          console.log(err);
-        }
-      );
-    }
+    this.username = this.auth.username();
   }
 
 }

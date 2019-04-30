@@ -1,7 +1,9 @@
-<button *ngIf="user" mat-button (click)="logoutDialog()">
-  {{ user.username }}
+<button *ngIf="username; else loginBtn" mat-button (click)="logoutDialog()">
+  {{ username }}
 </button>
 
-<button *ngIf="!user" mat-raised-button (click)="loginDialog()">
+<ng-template #loginBtn>
+<button mat-raised-button (click)="loginDialog()">
   Entrar
 </button>
+</ng-template>
