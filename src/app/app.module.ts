@@ -41,6 +41,7 @@ import { CreateAthleteComponent } from './components/athletes/create-athlete/cre
     HttpClientModule,
     FormsModule,
     MaterialModule,
+    ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   entryComponents: [

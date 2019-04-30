@@ -15,7 +15,6 @@ export class Athlete {
   rgOrgao: string;
 
   sex: string;
-  extra: boolean;
   college: string;
 
   tracks?: Registration[];

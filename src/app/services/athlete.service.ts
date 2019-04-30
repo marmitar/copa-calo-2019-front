@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '##/environments/environment';
@@ -23,10 +23,9 @@ export class AthleteService {
     return this.http.get(this.url + 'read', {params}) as Observable<Athlete>;
   }
 
-  create(name: string, rg: string, rgOrgao: string, sex: string, token: string, college?: string) {
-    const headers = {Authorization: 'Bearer ' + token};
+  create(name: string, rg: string, rgOrgao: string, sex: string, headers: {headers: HttpHeaders}, college?: string) {
     const body = {name, rg, rgOrgao, sex, college};
-    return this.http.put(this.url + 'create', body, {headers}) as Observable<Athlete>;
+    return this.http.put(this.url + 'create', body, headers) as Observable<Athlete>;
   }
 
 }

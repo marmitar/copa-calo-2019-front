@@ -1,3 +1,62 @@
-<p>
-  create-athlete works!
-</p>
+<mat-card class="inscricao">
+
+<form class="example-form" [formGroup]="inscricaoForm" (ngSubmit)="submitAthlete()">
+  <mat-form-field class="example-full-width">
+    <input type="text"
+      placeholder="Faculdade"
+      aria-label="Facul"
+      matInput
+      required
+      formControlName="college"
+      [matAutocomplete]="autoCollege">
+    <mat-autocomplete #autoCollege="matAutocomplete">
+      <mat-option *ngFor="let option of collegeOptions | async" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input type="text"
+      placeholder="Nome Completo"
+      aria-label="nome"
+      required
+      formControlName="name"
+      matInput>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input type="text"
+      placeholder="R.G."
+      aria-label="RG"
+      required
+      formControlName="rg"
+      matInput>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input type="text"
+      placeholder="Órgrão Emissor"
+      aria-label="RGO"
+      required
+      formControlName="rgOrgao"
+      matInput>
+  </mat-form-field>
+
+    <mat-label>
+      Gênero
+    </mat-label>
+    <mat-radio-group
+        required
+        formControlName="sex"
+        class="example-radio-group">
+      <mat-radio-button class="example-radio-button" value="feminino">
+        Feminino
+      </mat-radio-button>
+      <mat-radio-button class="example-radio-button" value="masculino">
+        Masculino
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <div class="filler"><div class="filler"></div><button mat-raised-button submit>Inscrever</button></div>
+</form>
+</mat-card>

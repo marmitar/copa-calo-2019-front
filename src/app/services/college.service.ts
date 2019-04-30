@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '##/environments/environment';
@@ -21,6 +21,10 @@ export class CollegeService {
   fetch(initials: string) {
     const params = {initials};
     return this.http.get(this.url + 'read', {params}) as Observable<College>;
+  }
+
+  getUserCollege(headers: {headers: HttpHeaders}) {
+    return this.http.get(this.url + 'read', headers) as Observable<College>;
   }
 
   create(college: College) {

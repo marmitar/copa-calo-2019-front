@@ -12,3 +12,11 @@ table {
 
   justify-content: space-around;
 }
+
+.mat-elevation-z8 {
+  overflow-x: auto;
+
+  .tableAthletes {
+    min-width: 1800px;
+  }
+}

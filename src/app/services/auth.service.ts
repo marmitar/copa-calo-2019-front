@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '##/environments/environment';
@@ -13,32 +13,37 @@ export { User };
 export class AuthService {
   private url = environment.apiURL + '/user/';
 
-  private user: User = null;
+  private user: User;
+  public userChange = new BehaviorSubject<User>(this.user);
 
   constructor(private http: HttpClient) { }
 
-  username() {
-    return this.user ? this.user.username : null;
+  username(): Observable<string> {
+    return this.userChange.pipe(
+      map(user => user ? user.username : null)
+    );
   }
 
-  isAdmin() {
-    return this.user.permission === 'admin';
+  permission(): Observable<string> {
+    return this.userChange.pipe(
+      map(user => user ? user.permission : 'none')
+    );
   }
 
-  isDM() {
-    return this.user.permission === 'dm';
+  headers(): {headers: HttpHeaders} {
+    let headers;
+    if (this.user) {
+      headers = new HttpHeaders({Authorization: 'Bearer ' + this.user.token});
+    } else {
+      headers = new HttpHeaders({});
+    }
+
+    return {headers};
   }
 
-  isArbiter() {
-    return this.user.permission === 'arbiter';
-  }
-
-  token() {
-    return this.user.token;
-  }
-
-  headers() {
-    return this.user ? {headers: {Authorization: 'Bearer ' + this.user.token}} : null;
+  updateUser(user: User) {
+    this.user = user;
+    this.userChange.next(user);
   }
 
   login(username: string, password: string) {
@@ -50,7 +55,7 @@ export class AuthService {
         throw Error('Falha no login');
       }
 
-      this.user = user;
+      this.updateUser(user);
     }, this));
   }
 
@@ -58,7 +63,7 @@ export class AuthService {
     const waitAns = this.http.delete(this.url + 'auth', this.headers()) as Observable<boolean>;
 
     return waitAns.pipe(map(ans => {
-      this.user = null;
+      this.updateUser(null);
 
       if (!ans) {
         throw Error('Problemas na saída');

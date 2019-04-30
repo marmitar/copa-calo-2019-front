@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 
 import { UserLoginComponent } from '$/user/user-login/user-login.component';
 import { UserLogoutComponent } from '$/user/user-logout/user-logout.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -13,30 +14,34 @@ import { UserLogoutComponent } from '$/user/user-logout/user-logout.component';
 export class UserComponent implements OnInit {
   username: string = null;
 
+  subscription: Subscription;
+
   constructor(public auth: AuthService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.getUser();
+    this.subscription = this.auth.username().subscribe(
+      username => this.username = username
+    );
   }
 
   loginDialog(): void {
     const dialogRef = this.dialog.open(UserLoginComponent);
 
-    dialogRef.afterClosed().subscribe(success => {
-      this.username = this.auth.username();
-    });
+    // dialogRef.afterClosed().subscribe(success => {
+
+    // });
   }
 
   logoutDialog() {
     const dialogRef = this.dialog.open(UserLogoutComponent);
 
-    dialogRef.afterClosed().subscribe(success => {
-      this.username = this.auth.username();
-    });
+    // dialogRef.afterClosed().subscribe(success => {
+    //   this.username = this.auth.username();
+    // });
   }
 
-  getUser() {
-    this.username = this.auth.username();
-  }
+  // getUser() {
+  //   this.username = this.auth.username();
+  // }
 
 }
