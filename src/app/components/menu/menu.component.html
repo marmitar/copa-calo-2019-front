@@ -3,7 +3,11 @@
 </button>
 
 <mat-menu #appMenu="matMenu">
-  <button mat-menu-item *ngIf="menu.inscricao" routerLink="/atleta">
+  <button mat-menu-item *ngIf="menu.criar" routerLink="/atleta">
     Novo Atleta
+  </button>
+
+  <button mat-menu-item *ngIf="menu.inscricao" routerLink="/inscricao">
+    Inscrição
   </button>
 </mat-menu>

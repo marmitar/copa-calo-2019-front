@@ -21,6 +21,7 @@ export class Athlete {
 }
 
 export class Track {
+  trackType: string;
   name: string;
   sex: string;
   athletes?: Athlete[];

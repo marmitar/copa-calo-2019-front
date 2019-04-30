@@ -13,7 +13,6 @@ export class UserLoginComponent {
   password: string = null;
 
   running = false;
-  success = false;
 
   constructor(
     private auth: AuthService,
@@ -27,7 +26,8 @@ export class UserLoginComponent {
     this.auth.login(this.username, this.password).subscribe(
       () => {
         this.alert.message('Entrada com sucesso');
-        this.success = true;
+
+        this.dialogRef.close(true);
       },
       err => {
         if (err.error.kind === 'ResourceNotFound') {
@@ -37,8 +37,9 @@ export class UserLoginComponent {
         } else {
           this.alert.error(err);
         }
-      },
-      () => this.dialogRef.close(this.success)
+
+        this.dialogRef.close(false);
+      }
     );
   }
 

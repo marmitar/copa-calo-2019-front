@@ -5,23 +5,28 @@ import { Subscription } from 'rxjs';
 
 class Menu {
   tipo: string;
+  criar: boolean;
   inscricao: boolean;
 }
 
 const ADMIN_MENU: Menu = {
   tipo: 'admin',
+  criar: true,
   inscricao: true
 };
 const DM_MENU: Menu = {
   tipo: 'dm',
+  criar: true,
   inscricao: true
 };
 const ARBITER_MENU: Menu = {
   tipo: 'arbiter',
+  criar: false,
   inscricao: false
 };
 const WATCHER_MENU: Menu = {
   tipo: 'watcher',
+  criar: false,
   inscricao: false
 };
 

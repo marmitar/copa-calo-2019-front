@@ -20,6 +20,7 @@ import { ToolbarComponent } from '$/toolbar/toolbar.component';
 import { UserLogoutComponent } from './components/user/user-logout/user-logout.component';
 import { AthletesComponent } from './components/athletes/athletes/athletes.component';
 import { CreateAthleteComponent } from './components/athletes/create-athlete/create-athlete.component';
+import { RegisterAthleteComponent } from './components/athletes/register-athlete/register-athlete.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CreateAthleteComponent } from './components/athletes/create-athlete/cre
     DashboardComponent,
     UserLogoutComponent,
     AthletesComponent,
-    CreateAthleteComponent
+    CreateAthleteComponent,
+    RegisterAthleteComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,55 @@
+<mat-card class="atleta-novo">
+
+<form class="example-form" [formGroup]="inscricaoForm" (ngSubmit)="submitRegistration()">
+  <mat-form-field class="example-full-width">
+    <mat-label>Faculdade</mat-label>
+    <mat-select formControlName="college" required>
+      <mat-option *ngFor="let option of colleges" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="tracks">
+      <mat-form-field class="example-full-width">
+        <mat-label>Prova</mat-label>
+        <mat-select formControlName="track" required>
+          <mat-option *ngFor="let option of tracks" [value]="option">
+            {{ option.name }}  ({{ option.sex }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="athletes">
+        <mat-form-field class="example-full-width">
+          <mat-label>Atleta Regular</mat-label>
+          <mat-select formControlName="athlete1" required>
+            <mat-option *ngFor="let option of athletes" [value]="option">
+              {{ option.name }}  -  {{ option.rg }} - {{ option.rgOrgao }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Atleta Regular</mat-label>
+          <mat-select formControlName="athlete2">
+            <mat-option *ngFor="let option of athletes" [value]="option">
+              {{ option.name }}  -  {{ option.rg }} - {{ option.rgOrgao }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Atleta Extra</mat-label>
+          <mat-select formControlName="athleteX">
+            <mat-option *ngFor="let option of athletes" [value]="option">
+              {{ option.name }}  -  {{ option.rg }} - {{ option.rgOrgao }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  </div>
+
+  <button mat-raised-button submit [disabled]="!inscricaoForm.valid">Registrar</button>
+</form>
+</mat-card>

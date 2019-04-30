@@ -1,4 +1,4 @@
-<mat-card class="inscricao">
+<mat-card class="atleta-novo">
 
 <form class="example-form" [formGroup]="inscricaoForm" (ngSubmit)="submitAthlete()">
   <mat-form-field class="example-full-width">
@@ -36,21 +36,21 @@
       matInput>
   </mat-form-field>
 
-    <mat-label>
-      Gênero
-    </mat-label>
-    <mat-radio-group
-        required
-        formControlName="sex"
-        class="example-radio-group">
-      <mat-radio-button class="example-radio-button" value="feminino">
-        Feminino
-      </mat-radio-button>
-      <mat-radio-button class="example-radio-button" value="masculino">
-        Masculino
-      </mat-radio-button>
-    </mat-radio-group>
+  <mat-label>
+    Gênero
+  </mat-label>
+  <mat-radio-group
+      required
+      formControlName="sex"
+      class="example-radio-group">
+    <mat-radio-button class="example-radio-button" value="feminino">
+      Feminino
+    </mat-radio-button>
+    <mat-radio-button class="example-radio-button" value="masculino">
+      Masculino
+    </mat-radio-button>
+  </mat-radio-group>
 
-    <div class="filler"><div class="filler"></div><button mat-raised-button submit>Inscrever</button></div>
+  <button mat-raised-button submit [disabled]="!inscricaoForm.valid">Inscrever</button>
 </form>
 </mat-card>

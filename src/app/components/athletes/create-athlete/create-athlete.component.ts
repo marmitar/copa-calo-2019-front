@@ -23,11 +23,7 @@ export class CreateAthleteComponent implements OnInit {
     sex: new FormControl()
   });
 
-  isDm: boolean;
-  collegeOptions: Observable<string[]>;
   colleges: string[] = [];
-
-  subscAuth: Subscription;
 
   constructor(
     private athlete: AthleteService,
@@ -36,17 +32,17 @@ export class CreateAthleteComponent implements OnInit {
     private alert: AlertService,
   ) { }
 
+  private subscAuth: Subscription;
   ngOnInit() {
     this.subscAuth = this.auth.permission().subscribe(
       permission => {
-        if (permission !== 'dm') {
-          this.isDm = false;
-          this.getColleges();
-        } else {
-          this.isDm = true;
+        if (permission === 'dm') {
           this.getCollege();
+        } else {
+          this.getColleges();
         }
-      }
+      },
+      err => this.alert.error(err)
     );
   }
 
@@ -74,7 +70,7 @@ export class CreateAthleteComponent implements OnInit {
     const atl = this.inscricaoForm.value as Athlete;
     this.athlete.create(atl.name, atl.rg, atl.rgOrgao, atl.sex, this.auth.headers(), atl.college).subscribe(
       data => {
-        this.alert.message(`${atl.name.split(' ')[0]} criado com sucesso`);
+        this.alert.message(`${data.name.split(' ')[0]} criado com sucesso`);
       },
       err => this.alert.error(err)
     );

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '##/environments/environment';
-import { College } from '#/models';
+import { College, Athlete } from '#/models';
 export { College };
 
 @Injectable({
@@ -30,4 +30,9 @@ export class CollegeService {
   create(college: College) {
     return this.http.put(this.url + 'create', college) as Observable<College>;
   }
+
+  getAthletes(initials: string) {
+    return this.http.get(this.url + 'athletes', {params: {initials}}) as Observable<Athlete[]>;
+  }
+
 }

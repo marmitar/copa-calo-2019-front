@@ -19,13 +19,13 @@
     <ng-container matColumnDef="rg">
       <th mat-header-cell *matHeaderCellDef> R.G. </th>
       <td mat-cell *matCellDef="let atl">
-        {{ atl.rg }} ({{ atl.rgOrgao }})
+        {{ atl.rg }} - {{ atl.rgOrgao }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="sex">
       <th mat-header-cell *matHeaderCellDef> Gênero </th>
-      <td mat-cell *matCellDef="let atl"> {{ atl.sex | titlecase }} </td>
+      <td mat-cell *matCellDef="let atl"> {{ atl.sex[0] | uppercase }} </td>
     </ng-container>
 
     <ng-container matColumnDef="college">
