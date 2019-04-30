@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -16,7 +17,16 @@ export class AuthService {
   private user: User;
   public userChange = new BehaviorSubject<User>(this.user);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookies: CookieService) { }
+
+  readCookies() {
+    const token = this.cookies.get('activation-token');
+    if (token) {
+      this.read(token).subscribe(
+        data => this.updateUser(data)
+      );
+    }
+  }
 
   username(): Observable<string> {
     return this.userChange.pipe(
@@ -30,10 +40,14 @@ export class AuthService {
     );
   }
 
-  headers(): {headers: HttpHeaders} {
+  headers(token?: string): {headers: HttpHeaders} {
+    if (!token && this.user) {
+      token = this.user.token;
+    }
+
     let headers;
-    if (this.user) {
-      headers = new HttpHeaders({Authorization: 'Bearer ' + this.user.token});
+    if (token) {
+      headers = new HttpHeaders({Authorization: 'Bearer ' + token});
     } else {
       headers = new HttpHeaders({});
     }
@@ -43,6 +57,7 @@ export class AuthService {
 
   updateUser(user: User) {
     this.user = user;
+    this.cookies.set('activation-token', user ? user.token : '');
     this.userChange.next(user);
   }
 
@@ -64,15 +79,11 @@ export class AuthService {
 
     return waitAns.pipe(map(ans => {
       this.updateUser(null);
-
-      if (!ans) {
-        throw Error('Problemas na saída');
-      }
     }, this));
   }
 
-  read() {
-    return this.http.get(this.url + 'read', this.headers()) as Observable<User>;
+  read(token?: string) {
+    return this.http.get(this.url + 'read', this.headers(token)) as Observable<User>;
   }
 
   update(username?: string, password?: string) {

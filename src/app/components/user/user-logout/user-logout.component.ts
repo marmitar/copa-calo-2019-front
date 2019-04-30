@@ -10,7 +10,6 @@ import { AuthService, User } from '#/services/auth.service';
 })
 export class UserLogoutComponent {
   running = false;
-  success = false;
 
   constructor(
     private auth: AuthService,
@@ -25,10 +24,12 @@ export class UserLogoutComponent {
         () => {
           this.alert.message('Saída com sucesso');
 
-          this.success = true;
+          this.dialogRef.close(true);
         },
-        err => this.alert.error(err),
-        () => this.dialogRef.close(this.success)
+        err => {
+          this.alert.error(err);
+          this.dialogRef.close(false);
+        }
       );
     }
 }

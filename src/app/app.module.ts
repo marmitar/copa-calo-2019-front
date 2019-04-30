@@ -7,6 +7,7 @@ import { AppRoutingModule } from '#/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MaterialModule } from '#/material.module';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from '#/app.component';
 import { environment } from '##/environments/environment';
@@ -52,7 +53,7 @@ import { DeleteAthleteComponent } from './components/athletes/delete-athlete/del
     UserLoginComponent,
     UserLogoutComponent
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

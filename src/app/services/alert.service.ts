@@ -51,12 +51,16 @@ export class AlertService {
   private getMessage(error: any): string {
     if (this.isString(error)) {
       return error;
-    } else if (this.isString(error.error.description)) {
-      return error.error.description;
-    } else if (this.isString(error.error.kind)) {
-      return error.error.kind;
-    } else if (this.isString(error.error)) {
+    } else if (error.error) {
+      if (this.isString(error.error)) {
       return error.error;
+      } else if (error.error.description && this.isString(error.error.description)) {
+        return error.error.description;
+      } else if (error.error.kind && this.isString(error.error.kind)) {
+        return error.error.kind;
+      } else {
+        return 'Ocorreu algum erro';
+      }
     } else {
       return 'Ocorreu algum erro';
     }

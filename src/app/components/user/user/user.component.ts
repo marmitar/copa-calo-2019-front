@@ -22,26 +22,16 @@ export class UserComponent implements OnInit {
     this.subscription = this.auth.username().subscribe(
       username => this.username = username
     );
+
+    this.auth.readCookies();
   }
 
   loginDialog(): void {
     const dialogRef = this.dialog.open(UserLoginComponent);
-
-    // dialogRef.afterClosed().subscribe(success => {
-
-    // });
   }
 
   logoutDialog() {
     const dialogRef = this.dialog.open(UserLogoutComponent);
-
-    // dialogRef.afterClosed().subscribe(success => {
-    //   this.username = this.auth.username();
-    // });
   }
-
-  // getUser() {
-  //   this.username = this.auth.username();
-  // }
 
 }
