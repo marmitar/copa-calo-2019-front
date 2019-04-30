@@ -2,18 +2,12 @@
 
 <form class="example-form" [formGroup]="inscricaoForm" (ngSubmit)="submitAthlete()">
   <mat-form-field class="example-full-width">
-    <input type="text"
-      placeholder="Faculdade"
-      aria-label="Facul"
-      matInput
-      required
-      formControlName="college"
-      [matAutocomplete]="autoCollege">
-    <mat-autocomplete #autoCollege="matAutocomplete">
-      <mat-option *ngFor="let option of collegeOptions | async" [value]="option">
+    <mat-label>Faculdade</mat-label>
+    <mat-select formControlName="college" required>
+      <mat-option *ngFor="let option of colleges" [value]="option">
         {{ option }}
       </mat-option>
-    </mat-autocomplete>
+    </mat-select>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">

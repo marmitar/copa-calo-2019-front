@@ -25,7 +25,7 @@ export class CreateAthleteComponent implements OnInit {
 
   isDm: boolean;
   collegeOptions: Observable<string[]>;
-  colleges: string[];
+  colleges: string[] = [];
 
   subscAuth: Subscription;
 
@@ -51,31 +51,23 @@ export class CreateAthleteComponent implements OnInit {
   }
 
   getCollege() {
-    this.collegeOptions = this.college.getUserCollege(this.auth.headers()).pipe(
-      map(college => {
-        this.collegeForm.setValue(college.initials);
+    this.college.getUserCollege(this.auth.headers()).subscribe(
+      data => {
+        this.colleges = [data.initials];
+        this.collegeForm.setValue(data.initials);
         this.collegeForm.disable();
-
-        return [college.initials];
-      })
+      },
+      err => this.alert.error(err)
     );
   }
 
   getColleges() {
     this.college.fetchAll().subscribe(
-      data => this.colleges = data.map(c => c.initials),
-      err => this.alert.error(err),
-      () => this.collegeOptions = this.collegeForm.valueChanges.pipe(
-        startWith(''),
-        map(options => this.filterOptions(options))
-      )
+      data => {
+        this.colleges = data.map(c => c.initials);
+      },
+      err => this.alert.error(err)
     );
-  }
-
-  private filterOptions(initials?: string): string[] {
-    const lower = initials.toLocaleLowerCase();
-
-    return this.colleges.filter(c => c.toLocaleLowerCase().includes(lower));
   }
 
   submitAthlete() {
