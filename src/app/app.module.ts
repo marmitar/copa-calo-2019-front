@@ -18,6 +18,8 @@ import { TracksComponent } from '$/tracks/tracks/tracks.component';
 import { DashboardComponent } from '$/dashboard/dashboard.component';
 import { ToolbarComponent } from '$/toolbar/toolbar.component';
 import { UserLogoutComponent } from './components/user/user-logout/user-logout.component';
+import { AthletesComponent } from './components/athletes/athletes/athletes.component';
+import { CreateAthleteComponent } from './components/athletes/create-athlete/create-athlete.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { UserLogoutComponent } from './components/user/user-logout/user-logout.c
     UserLoginComponent,
     TracksComponent,
     DashboardComponent,
-    UserLogoutComponent
+    UserLogoutComponent,
+    AthletesComponent,
+    CreateAthleteComponent
   ],
   imports: [
     BrowserModule,

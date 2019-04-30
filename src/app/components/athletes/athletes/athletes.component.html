@@ -1,0 +1,77 @@
+<div *ngIf="running; else showData">
+  <mat-spinner></mat-spinner>
+</div>
+
+
+<ng-template #showData>
+<mat-form-field class="buscaAtleta">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="athletes">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <td mat-cell *matCellDef="let atl"> {{ atl.name }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rg">
+      <th mat-header-cell *matHeaderCellDef> R.G. </th>
+      <td mat-cell *matCellDef="let atl">
+        {{ atl.rg }} ({{ atl.rgOrgao }})
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sex">
+      <th mat-header-cell *matHeaderCellDef> Gênero </th>
+      <td mat-cell *matCellDef="let atl"> {{ atl.sex | titlecase }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="college">
+      <th mat-header-cell *matHeaderCellDef> Faculdade </th>
+      <td mat-cell *matCellDef="let atl"> {{ atl.college }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tracks">
+      <th mat-header-cell *matHeaderCellDef> Provas </th>
+      <td mat-cell *matCellDef="let atl">
+          <mat-list>
+            <div *ngFor="let reg of atl.tracks; let last = last">
+              <ul class="provaAtleta">
+                <li>{{ reg.trackName }}</li>
+
+                  <li>
+                    <div *ngIf="reg.bestMark; else noBestMark">
+                        PB: {{ reg.bestMark }}
+                    </div>
+                    <ng-template #noBestMark>
+                    <div>-</div>
+                    </ng-template>
+                  </li>
+
+                  <li>
+                  <div *ngIf="reg.extra">
+                      Atleta Extra
+                      <br/>
+                    </div>
+                  </li>
+
+              </ul>
+              <mat-divider *ngIf="!last"></mat-divider>
+            </div>
+          </mat-list>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+    <tr mat-row *matRowDef="let row, columns: tableColumns;"></tr>
+
+  </table>
+
+  <!-- <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons>
+  </mat-paginator> -->
+</div>
+</ng-template>

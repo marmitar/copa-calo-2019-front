@@ -18,7 +18,7 @@ export class Athlete {
   extra: boolean;
   college: string;
 
-  tracks?: Track[];
+  tracks?: Registration[];
 }
 
 export class Track {
@@ -28,8 +28,8 @@ export class Track {
 }
 
 export class Registration {
-  name: string;
-  track: string;
+  trackName: string;
+  athlete?: Athlete;
+  extra: boolean;
   bestMark?: number;
-  athlete: Athlete;
 }

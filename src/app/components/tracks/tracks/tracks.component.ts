@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TrackService, Track } from '#/services/track.service';
 import { AlertService } from '#/services/alert.service';
-import { stringify } from '@angular/core/src/util';
 
 @Component({
   selector: 'app-tracks',
@@ -12,13 +11,21 @@ export class TracksComponent implements OnInit {
   tracks: Track[] = null;
   uniques: UniqueTrack[] = [];
 
+  @Input() fetchData = true;
   running = false;
 
   constructor(private track: TrackService, private alert: AlertService) { }
 
   ngOnInit() {
-    this.getTracks();
+    if (this.fetchData) {
+      this.getTracks();
+    }
 
+  }
+
+  clearTracks() {
+    this.tracks = null;
+    this.uniques = [];
   }
 
   getTracks() {

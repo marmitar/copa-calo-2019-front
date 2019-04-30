@@ -1,13 +1,32 @@
 <mat-accordion>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel
+      (opened)="appTracks.getTracks()"
+      (closed)="appTracks.clearTracks()">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Provas
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <app-tracks></app-tracks>
+    <app-tracks fetchData=false #appTracks></app-tracks>
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel
+      (opened)="appAthletes.getAthletes()"
+      (closed)="appAthletes.clearAthletes()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Atletas
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-athletes
+      class="athletesTable"
+      fetchData=false
+      #appAthletes>
+    </app-athletes>
   </mat-expansion-panel>
 
 </mat-accordion>
