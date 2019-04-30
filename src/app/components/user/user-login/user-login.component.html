@@ -3,27 +3,46 @@
 </div>
 
 <ng-template #getLoginData>
+<form (submit)="login()" #loginForm="ngForm">
+
   <h1 mat-dialog-title>Login</h1>
 
   <div mat-dialog-content>
     <p>
       <mat-form-field>
         <mat-label>Usuário</mat-label>
-        <input matInput [(ngModel)]="username">
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="username"
+          required
+          name="username"
+          id="username">
       </mat-form-field>
     </p>
     <p>
       <mat-form-field>
         <mat-label>Senha</mat-label>
-        <input matInput [(ngModel)]="password">
+        <input
+          type="password"
+          matInput
+          [(ngModel)]="password"
+          name="password"
+          id="password">
       </mat-form-field>
     </p>
   </div>
 
   <div mat-dialog-actions>
     <div class="filler"></div>
-    <button class="login" mat-button (click)="login()" cdkFocusInitial>
+    <button
+        class="login"
+        type="submit"
+        mat-button
+        [disabled]="!loginForm.form.valid"
+        cdkFocusInitial>
       Entrar
     </button>
   </div>
+</form>
 </ng-template>

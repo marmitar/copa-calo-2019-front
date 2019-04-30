@@ -30,11 +30,13 @@ export class UserComponent implements OnInit {
   }
 
   logoutDialog() {
-    const dialogRef = this.dialog.open(UserLogoutComponent);
+    const dialogRef = this.dialog.open(UserLogoutComponent, {data: this.token});
 
     dialogRef.afterClosed().subscribe(result => {
-      this.user = result;
-      this.token = result.token;
+      if (result) {
+        this.user = null;
+        this.token = null;
+      }
     });
   }
 

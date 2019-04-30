@@ -1,8 +1,8 @@
-<div *ngIf="running; else Logout">
+<div *ngIf="running; else LogoutUser">
   <mat-spinner></mat-spinner>
 </div>
 
-<ng-template #Logout>
+<ng-template #LogoutUser>
   <h1 mat-dialog-title>Quer sair?</h1>
 
   <div mat-dialog-actions>

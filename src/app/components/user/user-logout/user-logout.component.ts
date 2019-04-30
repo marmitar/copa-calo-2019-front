@@ -10,18 +10,19 @@ import { AuthService, User } from '#/services/auth.service';
 })
 export class UserLogoutComponent {
   running = false;
+  result = false;
 
   constructor(
     private auth: AuthService,
     private alert: AlertService,
-    public dialogRef: MatDialogRef<UserLogoutComponent>,
-    @Inject(MAT_DIALOG_DATA) public user: User
+    public dialogRef: MatDialogRef<UserLogoutComponent, boolean>,
+    @Inject(MAT_DIALOG_DATA) public token: string
   ) { }
 
     logout() {
       this.running = true;
 
-      this.auth.logout(this.user.token).subscribe(
+      this.auth.logout(this.token).subscribe(
         data => {
           if (data) {
             this.alert.message('Saída com sucesso');
@@ -29,13 +30,10 @@ export class UserLogoutComponent {
             this.alert.message('Ocorreu algum problema durante a saída');
           }
 
-          this.dialogRef.close(null);
+          this.result = true;
         },
-        err => {
-          this.alert.error(err);
-
-          this.dialogRef.close(this.user);
-        }
+        err => this.alert.error(err),
+        () => this.dialogRef.close(this.result)
       );
     }
 }

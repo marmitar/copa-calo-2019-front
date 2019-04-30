@@ -1,5 +1,33 @@
-<mat-card *ngFor="let track of tracks">
-  <mat-card-header>
-    {{ track.name }}  [{{ track.sex }}]
-  </mat-card-header>
-</mat-card>
+<table mat-table [dataSource]="uniques" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Prova </th>
+    <td mat-cell *matCellDef="let track"> {{ track.name }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="female">
+    <th mat-header-cell *matHeaderCellDef> Fem. </th>
+    <td mat-cell *matCellDef="let track">
+      <mat-checkbox
+          class="female-track"
+          [(ngModel)]="track.female"
+          [disabled]="true">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="male">
+    <th mat-header-cell *matHeaderCellDef> Masc. </th>
+    <td mat-cell *matCellDef="let track">
+        <mat-checkbox
+            class="male-track"
+            [(ngModel)]="track.male"
+            [disabled]="true">
+        </mat-checkbox>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['name', 'female', 'male']"></tr>
+  <tr mat-row *matRowDef="let row, columns: ['name', 'female', 'male'];"></tr>
+</table>
+

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { AlertService } from '#/services/alert.service';
-import { AuthService } from '#/services/auth.service';
+import { AuthService, User } from '#/services/auth.service';
 
 @Component({
   selector: 'app-user-login',
@@ -17,7 +17,7 @@ export class UserLoginComponent {
   constructor(
     private auth: AuthService,
     private alert: AlertService,
-    public dialogRef: MatDialogRef<UserLoginComponent>
+    public dialogRef: MatDialogRef<UserLoginComponent, User>
   ) {}
 
   login() {
