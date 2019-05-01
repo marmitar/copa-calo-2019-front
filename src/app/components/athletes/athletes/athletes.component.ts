@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { AthleteService, Athlete } from '#/services/athlete.service';
 import { AlertService } from '#/services/alert.service';
-import { Registration } from '#/models';
 
 
 @Component({
@@ -40,11 +39,25 @@ export class AthletesComponent implements OnInit {
 
     this.athlete.fetchAll().subscribe(
       data => {
-        this.athletes = new MatTableDataSource<Athlete>(data);
+        const athletes = this.sortAthletes(data);
+        this.athletes = new MatTableDataSource<Athlete>(athletes);
       },
       err => this.alert.error(err),
       () => this.running = false
     );
+  }
+
+  sortAthletes(athletes: Athlete[]): Athlete[] {
+    return athletes.sort((a, b) => {
+      if (a.college < b.college) {
+        return -1;
+      } else if (a.college === b.college) {
+        return 0;
+      } else {
+        return 1;
+      }
+    });
+
   }
 
   applyFilter(filterValue: string) {
