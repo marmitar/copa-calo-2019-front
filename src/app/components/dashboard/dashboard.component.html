@@ -9,7 +9,10 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <app-tracks fetchData=false #appTracks></app-tracks>
+    <app-tracks
+      class="expansion-option"
+      fetchData=false
+      #appTracks></app-tracks>
   </mat-expansion-panel>
 
 
@@ -23,7 +26,7 @@
     </mat-expansion-panel-header>
 
     <app-athletes
-      class="athletesTable"
+      class="expansion-option athletesTable"
       fetchData=false
       #appAthletes>
     </app-athletes>

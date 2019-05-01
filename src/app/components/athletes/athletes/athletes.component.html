@@ -4,6 +4,7 @@
 
 
 <ng-template #showData>
+<div class="athletes-app-inside">
 <mat-form-field class="buscaAtleta">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
 </mat-form-field>
@@ -73,5 +74,6 @@
     [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons>
   </mat-paginator> -->
+</div>
 </div>
 </ng-template>
